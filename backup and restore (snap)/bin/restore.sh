@@ -5,6 +5,7 @@
 
 plex_databases_dir="/var/snap/plexmediaserver/common/Library/Application Support/Plex Media Server/Plug-in Support/Databases"
 backups_dir="../backups"
+mkdir "${backups_dir}"
 
 backups_filename_path_array=()
 backups_datetime_array=()

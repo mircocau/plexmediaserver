@@ -5,6 +5,7 @@
 
 plex_databases_dir="/var/snap/plexmediaserver/common/Library/Application Support/Plex Media Server/Plug-in Support/Databases"
 backups_dir="../backups"
+mkdir "${backups_dir}"
 
 # Stop Plex Media Server (snap)
 echo "[INFO] Stopping Plex Media Server (snap) ..."
@@ -21,6 +22,14 @@ fi
 # Backup & compress
 echo "[INFO] Backupping & compressing ..."
 sudo tar cz -f "${backups_dir}/$(date '+%Y%m%d_%H%M').tar.gz" -C "${plex_databases_dir}" .
+
+if [ $? -ne 0 ]
+then
+    echo "[ERROR] Can't create backup."
+    echo "[INFO] Script NOT completed."
+    echo "[INFO] Exiting script."
+    exit 1
+fi
 
 # Start Plex Media Server (snap)
 echo "[INFO] Starting Plex Media Server (snap) ..."
